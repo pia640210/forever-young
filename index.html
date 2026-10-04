@@ -256,6 +256,26 @@ footer{border-top:1px solid var(--line);padding:32px 0 100px;font-size:13px;colo
 .qr-close{position:absolute;top:4px;right:8px;background:none;border:none;font-size:16px;color:#A49A8C;cursor:pointer;padding:4px}
 @media(max-width:860px){.qr-card{display:none}}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+
+/* ===== 影片 ===== */
+.video-sec{padding:72px 0}
+.video{position:relative;aspect-ratio:16/9;border-radius:18px;overflow:hidden;background:#0E1E26;box-shadow:0 30px 60px -36px rgba(19,78,99,.6);margin-top:14px}
+.video iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.video-play{position:absolute;inset:0;width:100%;height:100%;border:0;padding:0;cursor:pointer;background:#0E1E26}
+.video-play img{width:100%;height:100%;object-fit:cover;opacity:.88;transition:opacity .2s,transform .4s}
+.video-play:hover img{opacity:1;transform:scale(1.02)}
+.video-btn{position:absolute;left:50%;top:50%;width:76px;height:76px;margin:-38px 0 0 -38px;border-radius:50%;background:rgba(184,73,47,.92);box-shadow:0 10px 30px rgba(0,0,0,.35);transition:transform .2s}
+.video-btn::after{content:"";position:absolute;left:31px;top:24px;border-style:solid;border-width:14px 0 14px 22px;border-color:transparent transparent transparent #fff}
+.video-play:hover .video-btn{transform:scale(1.08)}
+.video-alt{margin-top:12px;font-size:14px;text-align:right}
+.video-tabs{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:28px}
+.video-tab{font:inherit;text-align:left;background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px 16px;cursor:pointer;color:var(--ink);transition:border-color .15s,background .15s}
+.video-tab:hover{border-color:var(--sea)}
+.video-tab[aria-selected="true"]{border-color:var(--sea);background:#EEF6F7;box-shadow:inset 0 -3px 0 var(--sea)}
+.vt-ep{display:block;font-size:12px;font-weight:500;color:var(--coral);letter-spacing:.04em}
+.vt-title{display:block;font-family:var(--serif);font-weight:700;font-size:16px;line-height:1.5;margin-top:2px}
+.video-desc{font-size:15px;color:var(--ink-soft);margin-top:16px;min-height:1.6em}
+@media(max-width:560px){.video-tabs{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -266,6 +286,7 @@ footer{border-top:1px solid var(--line);padding:32px 0 100px;font-size:13px;colo
     <button class="nav-toggle" aria-label="開啟選單" aria-expanded="false" onclick="toggleNav(this)">☰</button>
     <nav class="nav-links" id="navLinks">
       <a href="#mood">今天幾歲</a>
+      <a href="#video">影片</a>
       <a href="#sky">生命畫卷</a>
       <a href="#repair">修復提案</a>
       <a href="#draw">靈感抽卡</a>
@@ -300,6 +321,24 @@ footer{border-top:1px solid var(--line);padding:32px 0 100px;font-size:13px;colo
       </div>
     </div>
     <img class="hero-cover" src="images/今天你幾歲.jpg" data-fb="https://books.hellenchentruegroup.com/images/今天你幾歲.jpg" onerror="this.onerror=null;this.src=this.dataset.fb" alt="《今天你幾歲？永齡長春》書封" width="220">
+  </div>
+</section>
+
+<section class="video-sec" id="video">
+  <div class="wrap narrow">
+    <h2>聽陳海倫顧問親自談永齡長春</h2>
+    <p class="lead">選自 Podcast《陳海倫的人生幸福術》影片版。</p>
+    <div class="video-tabs" role="tablist" aria-label="選擇影片">
+      <button type="button" role="tab" class="video-tab" aria-selected="true" data-v="0">
+        <span class="vt-ep">第 1 集</span><span class="vt-title">永齡長春是什麼？可以吃嗎？</span>
+      </button>
+      <button type="button" role="tab" class="video-tab" aria-selected="false" data-v="1">
+        <span class="vt-ep">第 7 集</span><span class="vt-title">生活裡的麵包：我們如何看待賺錢？</span>
+      </button>
+    </div>
+    <p class="video-desc" id="videoDesc"></p>
+    <div class="video" id="videoBox" role="tabpanel"></div>
+    <p class="video-alt"><a id="videoLink" href="#" target="_blank" rel="noopener">到 YouTube 觀看</a></p>
   </div>
 </section>
 
@@ -561,6 +600,31 @@ $('#moodRange').addEventListener('input', e => {
   if (!moodUsed) { moodUsed = true; track('mood_slider'); }
 });
 setMood(3);
+
+
+// ===== 影片：兩集切換；點擊後才載入 YouTube，讓頁面開得更快 =====
+const VIDEOS = [
+  { id: 'a1vXAKqS-Ck', start: 0,  title: '第 1 集：永齡長春是什麼？可以吃嗎？', desc: '為什麼要推廣永齡長春？從這一集，認識這本書最核心的觀念。' },
+  { id: 'jAxKZrerASk', start: 24, title: '第 7 集：生活裡的麵包', desc: '談人生最現實的層面，聽陳海倫顧問怎麼看待賺錢與生活。' }
+];
+let videoIdx = 0;
+function showVideo(i) {
+  videoIdx = i;
+  const v = VIDEOS[i];
+  document.querySelectorAll('.video-tab').forEach((t, k) => t.setAttribute('aria-selected', k === i));
+  $('#videoDesc').textContent = v.desc;
+  $('#videoLink').href = `https://www.youtube.com/watch?v=${v.id}${v.start ? '&t=' + v.start + 's' : ''}`;
+  $('#videoBox').innerHTML = `<button type="button" class="video-play" id="videoPlay" aria-label="播放：${v.title}">
+      <img src="https://i.ytimg.com/vi/${v.id}/hqdefault.jpg" alt="" loading="lazy" onerror="this.remove()">
+      <span class="video-btn" aria-hidden="true"></span>
+    </button>`;
+  $('#videoPlay').addEventListener('click', () => {
+    $('#videoBox').innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${v.id}?autoplay=1&rel=0${v.start ? '&start=' + v.start : ''}" title="${v.title}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+    track('video_play', { label: v.id });
+  });
+}
+document.querySelectorAll('.video-tab').forEach(t => t.addEventListener('click', () => { if (+t.dataset.v !== videoIdx) showVideo(+t.dataset.v); }));
+showVideo(0);
 
 // ===== 天空 =====
 const lerp = (a, b, t) => a + (b - a) * t;
