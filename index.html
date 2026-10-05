@@ -276,6 +276,17 @@ footer{border-top:1px solid var(--line);padding:32px 0 100px;font-size:13px;colo
 .vt-title{display:block;font-family:var(--serif);font-weight:700;font-size:16px;line-height:1.5;margin-top:2px}
 .video-desc{font-size:15px;color:var(--ink-soft);margin-top:16px;min-height:1.6em}
 @media(max-width:560px){.video-tabs{grid-template-columns:1fr}}
+
+/* ===== 官網整合新增（2026-10）===== */
+:root{--cp-accent:var(--coral)}
+.cp-list{list-style:none;margin:22px 0 0;padding:0;max-width:40em}
+.cp-list li{position:relative;padding:13px 0 13px 28px;border-top:1px solid var(--line,#e5ddd0);font-size:16.5px;line-height:1.85}
+.cp-list li:last-child{border-bottom:1px solid var(--line,#e5ddd0)}
+.cp-list li::before{content:"";position:absolute;left:4px;top:1.5em;width:12px;height:2px;background:var(--cp-accent)}
+.cp-label{font-family:var(--serif);font-weight:700;font-size:18px;margin:30px 0 2px}
+.cp-wrote{font-size:17px;line-height:1.95;max-width:40em;padding-left:18px;border-left:3px solid var(--cp-accent);margin-top:12px}
+.cp-white{background:#fff}
+
 </style>
 </head>
 <body>
@@ -420,6 +431,25 @@ footer{border-top:1px solid var(--line);padding:32px 0 100px;font-size:13px;colo
   </div>
 </section>
 
+
+<!-- 官網整合：適合誰 -->
+<section class="cp-white" id="fit-you">
+  <div class="wrap">
+    <h2>這本書適合你，如果……</h2>
+    <ul class="cp-list"><li>你覺得自己開始「老了」，不只是身體，還有心態。</li><li>你想養身，也想養心。</li><li>你希望自己越活越有價值（副標說：8 歲到 108 歲都必讀）。</li></ul>
+  </div>
+</section>
+
+<!-- 官網整合：作者寫作初衷 -->
+<section class="" id="why-written">
+  <div class="wrap">
+    <h2>陳海倫為什麼寫這本書</h2>
+    <p class="cp-label">她在顧問工作裡，一再看到：</p><ul class="cp-list"><li>許多人到了四、五十歲，就說「算了，我老了」，被年齡的框框限制住。</li><li>沒有未來的目標，困在對過去的後悔和抱怨裡。</li><li>只靠習慣過日子，身、心、腦沒有一起運作。</li></ul>
+    <p class="cp-label">所以，她寫了這本書：</p>
+    <p class="cp-wrote">面對皺紋、眼花、體力衰退，一直追求美的她開始問自己：真的老了嗎？年過六十，她發現身邊同齡的朋友幾乎都放棄了。她走出一條自在、舒服的路，想把這些經驗分享給同路的人。</p>
+  </div>
+</section>
+
 <section class="buy-sec" id="buy">
   <div class="wrap">
     <h2>開啟屬於你的永齡長春之旅</h2>
@@ -435,9 +465,10 @@ footer{border-top:1px solid var(--line);padding:32px 0 100px;font-size:13px;colo
           </div>
           <div class="path">
             <h3>向出版社直購，享套書優惠</h3>
-            <p>任選 3 本 NT$1,000（單本原價 380）；《說話的藝術》全 3 冊 NT$1,100。</p>
+            <p>任選 3 本 NT$1,000｜買五送一（任選 6 本）NT$1,700<br>《說話的藝術》全 3 冊 NT$1,100</p>
+            <a class="btn btn-main" href="https://books.hellenchentruegroup.com/order/?add=jingtian" data-track="buy_click" data-label="publisher_order">線上訂購，自動套用優惠</a>
             <a class="btn btn-ghost" href="tel:0287122800" data-track="buy_click" data-label="publisher_tel">來電訂購 (02) 8712-2800</a>
-            <p class="note">轉帳購書：玉山銀行 808　0406-940-003763，請來電告知末五碼。<a href="https://books.hellenchentruegroup.com/purchase.html">看完整購書說明</a></p>
+            <p class="note">轉帳購書：玉山銀行 808　0406-940-003763，匯款後請來電或寄 Email 告知末五碼。<br>來電時間：週二至週四 09:00–17:00，週一、週五 13:00–17:00（週末及國定假日公休）<br>Email 隨時收件：<a href="mailto:createbook.press@gmail.com">createbook.press@gmail.com</a></p>
           </div>
         </div>
       </div>
@@ -512,7 +543,7 @@ footer{border-top:1px solid var(--line);padding:32px 0 100px;font-size:13px;colo
     <span>© 2026 創意出版社</span>
     <nav>
       <a href="https://books.hellenchentruegroup.com/">回創意出版社首頁</a>
-      <a href="https://books.hellenchentruegroup.com/purchase.html">購書說明</a>
+      <a href="https://books.hellenchentruegroup.com/order/?add=jingtian">購書說明</a>
       <a href="https://books.hellenchentruegroup.com/contact.html">聯絡我們</a>
     </nav>
   </div>
